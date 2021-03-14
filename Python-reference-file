@@ -1,0 +1,428 @@
+# string syntax
+str = 'Hello World!'
+
+print str          # Prints complete string
+print str[0]       # Prints first character of the string
+print str[2:5]     # Prints characters starting from 3rd to 5th
+print str[2:]      # Prints string starting from 3rd character
+print str * 2      # Prints string two times
+print str + "TEST" # Prints concatenated string
+
+# string formatting operator
+print "My name is %s and weight is %d kg!" % ('Zara', 21)
+
+# List
+list = [ 'abcd', 786 , 2.23, 'john', 70.2 ]
+tinylist = [123, 'john']
+
+print list          # Prints complete list
+print list[0]       # Prints first element of the list
+print list[1:3]     # Prints elements starting from 2nd till 3rd 
+print list[2:]      # Prints elements starting from 3rd element
+print tinylist * 2  # Prints list two times
+print list + tinylist # Prints concatenated lists
+
+list1 = ['physics', 'chemistry', 1997, 2000];
+list2 = [1, 2, 3, 4, 5, 6, 7 ];
+print ("list1[0]: ", list1[0])
+print ("list2[1:5]: ", list2[1:5])
+
+#tuple
+tuple = ( 'abcd', 786 , 2.23, 'john', 70.2  )
+tinytuple = (123, 'john')
+
+print tuple               # Prints the complete tuple
+print tuple[0]            # Prints first element of the tuple
+print tuple[1:3]          # Prints elements of the tuple starting from 2nd till 3rd 
+print tuple[2:]           # Prints elements of the tuple starting from 3rd element
+print tinytuple * 2       # Prints the contents of the tuple twice
+print tuple + tinytuple   # Prints concatenated tuples
+
+#dictionary
+dict = {}
+dict['one'] = "This is one"
+dict[2]     = "This is two"
+
+tinydict = {'name': 'john','code':6734, 'dept': 'sales'}
+
+
+print (dict['one'] )      # Prints value for 'one' key
+print (dict[2]       )    # Prints value for 2 key
+print (tinydict       )   # Prints complete dictionary
+print (tinydict.keys() )  # Prints all the keys
+print (tinydict.values()) # Prints all the values
+
+# Single statement
+var = 100
+if ( var == 100 ) : print "Value of expression is 100"
+
+# Date and Time
+import time;  # This is required to include time module.
+
+#function
+
+def printinfo(name, age):
+   print ("Name: ", name)
+   print ("Age ", age)
+   return;
+
+# Now you can call printinfo function
+printinfo( age=50, name="miki" )
+
+
+ticks = time.time()
+print ("Number of ticks since 12:00am, January 1, 1970:", ticks)
+
+localtime = time.localtime(time.time())
+print ("Local current time :", localtime)
+
+localtime = time.asctime( time.localtime(time.time()) )
+print ("Local current time :", localtime)
+
+import calendar
+
+cal = calendar.month(2008, 1)
+print ("Here is the calendar:")
+print (cal)
+
+# File I/O
+
+# Open a file
+fo = open("foo.txt", "wb")
+print ("Name of the file: ", fo.name)
+print ("Closed or not : ", fo.closed)
+print ("Opening mode : ", fo.mode)
+print ("Softspace flag : ", fo.softspace)
+
+# Close opend file
+fo.close()
+
+# Exception Handling
+
+'''This example opens a file, writes content in the, file and comes out gracefully because there is no problem at all −
+Live Demo'''
+try:
+   fh = open("./testfile1.txt", "w")
+   fh.write("This is my test file for exception handling!!. It is looking gooe")
+except IOError:
+   print("Error: can\'t find file or read data")
+else:
+   print("Written content in the file successfully")
+   fh.close()
+
+# 2nd Example
+try:
+   fh = open("./testfile.txt", "w")
+   try:
+      fh.write("This is my test file for exception handling!!")
+   finally:
+      print("Going to close the file")
+      fh.close()
+except IOError:
+   print("Error: can\'t find file or read data")
+
+   # Object Oriented
+
+   class Employee:
+   empCount = 0
+
+   def __init__(self, name, salary):
+      self.name = name
+      self.salary = salary
+      Employee.empCount += 1
+   
+   def displayCount(self):
+     print ("Total Employee %d" % Employee.empCount)
+
+   def displayEmployee(self):
+      print ("Name : ", self.name,  ", Salary: ", self.salary)
+
+"This would create first object of Employee class"
+emp1 = Employee("Zara", 2000)
+"This would create second object of Employee class"
+emp2 = Employee("Manni", 5000)
+emp1.displayEmployee()
+emp2.displayEmployee()
+print ("Total Employee %d" % Employee.empCount)
+
+# Search Objects
+
+import re
+
+line = "Cats are smarter than dogs";
+
+searchObj = (re.search( r'(.*) are (.*?) .*', line, re.M|re.I))
+
+if searchObj:
+   print ("searchObj.group() : ", searchObj.group())
+   print ("searchObj.group(1) : ", searchObj.group(1))
+   print ("searchObj.group(2) : ", searchObj.group(2))
+else:
+   print ("Nothing found!!")
+
+# Second Example
+   import re
+
+line = ("Cats are smarter than dogs")
+
+matchObj = (re.match( r'(.*) are (.*?) .*', line, re.M|re.I))
+
+if matchObj:
+   print ("matchObj.group() : ", matchObj.group())
+   print ("matchObj.group(1) : ", matchObj.group(1))
+   print ("matchObj.group(2) : ", matchObj.group(2))
+else:
+   print ("No match!!")
+
+   # Mysqldb connection
+
+   
+import MySQLdb
+
+# Open database connection
+db = MySQLdb.connect("localhost","testuser","test123","TESTDB" )
+
+# prepare a cursor object using cursor() method
+cursor = db.cursor()
+
+# execute SQL query using execute() method.
+cursor.execute("SELECT VERSION()")
+
+# Fetch a single row using fetchone() method.
+data = (cursor.fetchone())
+print ("Database version : %s " % data)
+
+# disconnect from server
+db.close()
+
+# create simple server waiting for client connection
+
+import socket               # Import socket module
+
+s = socket.socket()         # Create a socket object
+host = socket.gethostname() # Get local machine name
+port = 12345                # Reserve a port for your service.
+s.bind((host, port))        # Bind to the port
+
+s.listen(5)                 # Now wait for client connection.
+while True:
+   c, addr = s.accept()     # Establish connection with client.
+   print ('Got connection from', addr)
+   c.send('Thank you for connecting')
+   c.close()                # Close the connection
+
+   # make client
+
+   #!/usr/bin/python           # This is client.py file
+
+import socket               # Import socket module
+
+s = socket.socket()         # Create a socket object
+host = socket.gethostname() # Get local machine name
+port = 12345                # Reserve a port for your service.
+
+s.connect((host, port))
+print (s.recv(1024))
+s.close()                     # Close the socket when done
+
+# send an attachment as a file
+
+import smtplib
+import base64
+
+filename = "/tmp/test.txt"
+
+# Read a file and encode it into base64 format
+fo = open(filename, "rb")
+filecontent = fo.read()
+encodedcontent = base64.b64encode(filecontent)  # base64
+
+sender = 'webmaster@tutorialpoint.com'
+reciever = 'amrood.admin@gmail.com'
+
+marker = "AUNIQUEMARKER"
+
+body ="""
+This is a test email to send an attachement.
+"""
+# Define the main headers.
+part1 = """From: From Person <me@fromdomain.net>
+To: To Person <amrood.admin@gmail.com>
+Subject: Sending Attachement
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary=%s
+--%s
+""" % (marker, marker)
+
+# Define the message action
+part2 = """Content-Type: text/plain
+Content-Transfer-Encoding:8bit
+
+%s
+--%s
+""" % (body,marker)
+
+# Define the attachment section
+part3 = """Content-Type: multipart/mixed; name=\"%s\"
+Content-Transfer-Encoding:base64
+Content-Disposition: attachment; filename=%s
+
+%s
+--%s--
+""" %(filename, filename, encodedcontent, marker)
+message = part1 + part2 + part3
+
+try:
+   smtpObj = smtplib.SMTP('localhost')
+   smtpObj.sendmail(sender, reciever, message)
+   print "Successfully sent email"
+except Exception:
+   print "Error: unable to send email"
+
+# multithreading
+
+import thread
+import time
+
+# Define a function for the thread
+def print_time( threadName, delay):
+   count = 0
+   while count < 5:
+      time.sleep(delay)
+      count += 1
+      print "%s: %s" % ( threadName, time.ctime(time.time()) )
+
+# Create two threads as follows
+try:
+   thread.start_new_thread( print_time, ("Thread-1", 2, ) )
+   thread.start_new_thread( print_time, ("Thread-2", 4, ) )
+except:
+   print "Error: unable to start thread"
+
+while 1:
+   pass
+
+# Xml processing
+
+import xml.sax
+
+class MovieHandler( xml.sax.ContentHandler ):
+   def __init__(self):
+      self.CurrentData = ""
+      self.type = ""
+      self.format = ""
+      self.year = ""
+      self.rating = ""
+      self.stars = ""
+      self.description = ""
+
+   # Call when an element starts
+   def startElement(self, tag, attributes):
+      self.CurrentData = tag
+      if tag == "movie":
+         print = ("*****Movie*****")
+         title = (attributes["title"])
+         print = ("Title:", title)
+
+   # Call when an elements ends
+   def endElement(self, tag):
+      if self.CurrentData == "type":
+         print ("Type:", self.type)
+      elif self.CurrentData == "format":
+         print ("Format:", self.format)
+      elif self.CurrentData == "year":
+         print ("Year:", self.year)
+      elif self.CurrentData == "rating":
+         print ("Rating:", self.rating)
+      elif self.CurrentData == "stars":
+         print ("Stars:", self.stars)
+      elif self.CurrentData == "description":
+         print ("Description:", self.description)
+      self.CurrentData = ""
+
+   # Call when a character is read
+   def characters(self, content):
+      if self.CurrentData == "type":
+         self.type = content
+      elif self.CurrentData == "format":
+         self.format = content
+      elif self.CurrentData == "year":
+         self.year = content
+      elif self.CurrentData == "rating":
+         self.rating = content
+      elif self.CurrentData == "stars":
+         self.stars = content
+      elif self.CurrentData == "description":
+         self.description = content
+  
+if ( __name__ == "__main__"):
+   
+   # create an XMLReader
+   parser = xml.sax.make_parser()
+   # turn off namepsaces
+   parser.setFeature(xml.sax.handler.feature_namespaces, 0)
+
+   # override the default ContextHandler
+   Handler = MovieHandler()
+   parser.setContentHandler( Handler )
+   
+   parser.parse("movies.xml")
+
+   # Tinkter GUI
+
+   import tkinter as tk
+
+class Application(tk.Frame):
+    def __init__(self, master=None):
+        super().__init__(master)
+        self.master = master
+        self.pack()
+        self.create_widgets()
+
+    def create_widgets(self):
+        self.hi_there = tk.Button(self)
+        self.hi_there["text"] = "Hello World\n(click me)"
+        self.hi_there["command"] = self.say_hi
+        self.hi_there.pack(side="top")
+
+        self.quit = tk.Button(self, text="QUIT", fg="red",
+                              command=self.master.destroy)
+        self.quit.pack(side="bottom")
+
+    def say_hi(self):
+        print("hi there, everyone!")
+
+root = tk.Tk()
+app = Application(master=root)
+app.mainloop()
+
+# Second GUI 
+import tkinter as tk
+
+class App(tk.Frame):
+    def __init__(self, master):
+        super().__init__(master)
+        self.pack()
+
+        self.entrythingy = tk.Entry()
+        self.entrythingy.pack()
+
+        # Create the application variable.
+        self.contents = tk.StringVar()
+        # Set it to some value.
+        self.contents.set("this is a variable")
+        # Tell the entry widget to watch this variable.
+        self.entrythingy["textvariable"] = self.contents
+
+        # Define a callback for when the user hits return.
+        # It prints the current value of the variable.
+        self.entrythingy.bind('<Key-Return>',
+                             self.print_contents)
+
+    def print_contents(self, event):
+        print("Hi. The current entry content is:",
+              self.contents.get())
+
+root = tk.Tk()
+myapp = App(root)
+myapp.mainloop()
